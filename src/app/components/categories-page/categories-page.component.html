@@ -1,0 +1,19 @@
+<div *ngIf="user.IsAdmin">
+  <div class="text-right" style="margin-top: 1.5em; margin-bottom: 1em; margin-right: 1em">
+    <button class="btn btn-primary">Добавить категорию</button>
+  </div>
+
+  <kendo-grid [data]="gridData" [height]="410">
+    <kendo-grid-column field="ID" title="ID" width="40">
+    </kendo-grid-column>
+    <kendo-grid-column field="Name" title="Название" width="250">
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Действия" width="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button class="btn btn-danger" (click)="onRemoveCategory(dataItem)">Удалить</button>
+        <button class="btn btn-primary" (click)="onChangeCategory(dataItem)" style="margin-left: 1em;">Изменить</button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>

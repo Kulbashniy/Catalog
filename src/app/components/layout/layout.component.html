@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-sm bg-light">
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['catalog']" [routerLinkActive]="['active-link']">Каталог</a>
+    </li>
+    <li *ngIf="user.IsAdmin" class="nav-item">
+      <a class="nav-link" [routerLink]="['categories']" [routerLinkActive]="['active-link']">Категории</a>
+    </li>
+    <li *ngIf="user.IsAdmin" class="nav-item">
+      <a class="nav-link" [routerLink]="['tovars']" [routerLinkActive]="['active-link']">Товары</a>
+    </li>
+  </ul>
+  <div style="display: inline-block">
+    <button *ngIf="user.Authorized; else login" class="btn btn-primary" (click)="onLogOutClick()">Выйти</button>
+    <ng-template #login>
+      <button class="btn btn-primary" (click)="onLogInClick()">Войти</button>
+    </ng-template>
+  </div>
+
+</nav>
+
+<app-login [(opened)]="loginOpened" (userLogin)="userLogin($event)"></app-login>
+
+<div *ngIf="!user.Authorized">
+  <div>
+    Авторизуйтесь под учетной записью пользователя чтобы просматривать каталог
+  </div>
+  <div>
+    Чтобы просматривать список категорий и товаров авторизуйтесь под учетной записью администратора
+  </div>
+</div>
+
+<router-outlet *ngIf="user.Authorized"></router-outlet>
