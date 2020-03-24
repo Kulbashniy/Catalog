@@ -1,6 +1,6 @@
 <div *ngIf="user.IsAdmin">
   <div class="text-right" style="margin-top: 1.5em; margin-bottom: 1em; margin-right: 1em">
-    <button class="btn btn-primary">Добавить категорию</button>
+    <button class="btn btn-primary" (click)="onAddCategory()">Добавить категорию</button>
   </div>
 
   <kendo-grid [data]="gridData" [height]="410">
@@ -16,4 +16,11 @@
       </ng-template>
     </kendo-grid-column>
   </kendo-grid>
+
+  <app-category-window [(opened)]="categoryWindowOpened" [category]="currentCategory"></app-category-window>
+  <app-replace-category-window *ngIf="currentCategory" [(opened)]="replaceCategoryWindowOpened" [category]="currentCategory" [anotherCategories]="catWithoutCurrent"></app-replace-category-window>
+
+  <div kendoDialogContainer></div>
+
+
 </div>

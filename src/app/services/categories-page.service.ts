@@ -12,18 +12,17 @@ export class CategoriesPageService {
   constructor() { }
 
   public addCategory(data: Category) {
+    console.log(data);
     const allCategories = window.localStorage.getItem('Categories');
+    window.localStorage.removeItem('Categories');
     let result: Category[] = [];
-    if (!allCategories) {
-      result.push(data);
-    }
-    else {
+    if (allCategories) {
       let parsed = JSON.parse(allCategories);
       parsed.forEach((category) => {
         result.push(new Category(category.ID, category.Name));
       });
     }
-
+    result.push(data);
     let json = JSON.stringify(result);
     window.localStorage.setItem('Categories', json);
     this.categories$.next(result);
@@ -85,7 +84,22 @@ export class CategoriesPageService {
     const allCategories = window.localStorage.getItem('Categories');
     let result: Category[];
     let parsed = JSON.parse(allCategories);
-    result = parsed.map((category) => { return new Category(category.ID, category.Name); });
-    this.categories$.next(result);
+    if (parsed) {
+      result = parsed.map((category) => { return new Category(category.ID, category.Name); });
+      this.categories$.next(result);
+    }
+  }
+
+  public loadAllCategories(): Category[] {
+    const allCategories = window.localStorage.getItem('Categories');
+    let result: Category[];
+    let parsed = JSON.parse(allCategories);
+    if (parsed) {
+      result = parsed.map((category) => { return new Category(category.ID, category.Name); });
+      return result;
+    }
+    else {
+      return [];
+    }
   }
 }

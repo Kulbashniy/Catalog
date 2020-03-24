@@ -1,0 +1,26 @@
+<kendo-window title="Замена удаляемой категории у продуктов" *ngIf="opened" (close)="close()" [minWidth]="280" [width]="450" [minHeight]="150">
+
+  <form class="k-form" #form="ngForm" novalidate>
+
+    <label class="k-form-field">
+      <span>Категории*</span>
+      <kendo-multiselect [data]="anotherCategories"
+                         [textField]="'Name'"
+                         [valueField]="'ID'"
+                         [(ngModel)]="newCategories"
+                         name="categories"
+                         required>
+      </kendo-multiselect>
+    </label>
+
+    <div class="text-right">
+      <button type="button" class="btn btn-secondary" (click)="close()">Отмена</button>
+      <button type="button" style="margin-left:1em;" class="btn btn-primary"
+              (click)="submit(form)"
+              [disabled]="form.invalid">
+        ОК
+      </button>
+    </div>
+  </form>
+
+</kendo-window>

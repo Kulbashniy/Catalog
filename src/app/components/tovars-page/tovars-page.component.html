@@ -1,1 +1,37 @@
-<p>tovars-page works!</p>
+<div *ngIf="user.IsAdmin">
+  <div class="text-right" style="margin-top: 1.5em; margin-bottom: 1em; margin-right: 1em">
+    <button class="btn btn-primary" (click)="onAddTovar()">Добавить товар</button>
+  </div>
+
+  <kendo-grid [data]="tovars" [height]="410">
+    <kendo-grid-column field="ID" title="ID" width="40">
+    </kendo-grid-column>
+    <kendo-grid-column field="Name" title="Название" width="250">
+    </kendo-grid-column>
+    <kendo-grid-column field="Cost" title="Цена" width="120">
+    </kendo-grid-column>
+    <kendo-grid-column field="DateEnd" title="Срок годности" width="140">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <span>{{ dataItem.DateEnd | date:'dd.MM.yyyy' }}</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="Categories" title="Категории" width="250">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <span *ngFor="let category of dataItem.Categories">{{category.Name}};</span>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Действия" width="250">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button class="btn btn-danger" (click)="onRemoveTovar(dataItem)">Удалить</button>
+        <button class="btn btn-primary" (click)="onChangeTovar(dataItem)" style="margin-left: 1em;">Изменить</button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+
+  <app-tovar-window [(opened)]="tovarWindowOpened" [tovar]="currentTovar"></app-tovar-window>
+
+  <div kendoDialogContainer></div>
+
+
+</div>

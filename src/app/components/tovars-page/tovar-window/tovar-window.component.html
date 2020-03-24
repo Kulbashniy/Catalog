@@ -1,0 +1,62 @@
+<kendo-window title="Введите информацию о категории" *ngIf="opened" (close)="close()" [minWidth]="280" [width]="450" [minHeight]="150">
+
+  <form *ngIf="tovar" class="k-form" #form="ngForm" novalidate>
+
+    <label class="k-form-field">
+      <span>Название*</span>
+      <input class="form-control" type="text" placeholder="Название"
+             [(ngModel)]="tovar.Name"
+             name="title"
+             required />
+    </label>
+    <div *ngIf="errors.Name" class="alert alert-danger">
+      Имя должно содержать больше 5 и не больше 40 сиволом
+    </div>
+
+    <label class="k-form-field">
+      <span>Стоимость*</span>
+      <input class="form-control" type="number" placeholder="Стоимость"
+             [(ngModel)]="tovar.Cost"
+             name="cost"
+             required />
+    </label>
+    <div *ngIf="errors.Cost" class="alert alert-danger">
+      Стоимость должна быть больше нуля
+    </div>
+
+    <label class="k-form-field">
+      <span>Срок годности*</span>
+      <kendo-datepicker [(ngModel)]="tovar.DateEnd"
+                        name="dateend"
+                        required></kendo-datepicker>
+    </label>
+    <div *ngIf="errors.DateEnd" class="alert alert-danger">
+      Срок годности должен быть больше чем сегодняшнее число
+    </div>
+
+    <label class="k-form-field">
+      <span>Категории*</span>
+      <kendo-multiselect [data]="categories"
+                         [textField]="'Name'"
+                         [valueField]="'ID'"
+                         [(ngModel)]="tovar.Categories"
+                         name="categories"
+                         required>
+      </kendo-multiselect>
+    </label>
+    <div *ngIf="errors.Categories" class="alert alert-danger">
+      Должна быть хоть одна категория
+    </div>
+
+
+    <div class="text-right">
+      <button type="button" class="btn btn-secondary" (click)="close()">Отмена</button>
+      <button type="button" style="margin-left:1em;" class="btn btn-primary"
+              (click)="submit()"
+              [disabled]="form.invalid">
+        ОК
+      </button>
+    </div>
+  </form>
+
+</kendo-window>

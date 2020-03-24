@@ -15,6 +15,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { CategoryWindowComponent } from './components/categories-page/category-window/category-window.component';
+import { TovarWindowComponent } from './components/tovars-page/tovar-window/tovar-window.component';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { ReplaceCategoryWindowComponent } from './components/categories-page/replace-category-window/replace-category-window.component';
+
+
 
 
 
@@ -28,7 +35,10 @@ import { GridModule } from '@progress/kendo-angular-grid';
     CatalogPageComponent,
     LayoutComponent,
     TovarsPageComponent,
-    LoginComponent
+    LoginComponent,
+    CategoryWindowComponent,
+    TovarWindowComponent,
+    ReplaceCategoryWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +48,9 @@ import { GridModule } from '@progress/kendo-angular-grid';
     FormsModule,
     PopupModule,
     ButtonsModule,
-    GridModule
+    GridModule,
+    DropDownsModule,
+    DateInputsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

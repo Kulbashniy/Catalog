@@ -17,8 +17,9 @@ export class Category {
   }
 
   public static Add(name: string): Promise<Category> {
+    // симулируем таймером задержку при создании категории (запрос ожидаем)
     const promise = new Promise<Category>((resolve, reject) => {
-      timer(100).toPromise().then((data) => {   // не пишем для ошибочного запроса только потому что это таймер
+      timer(100).toPromise().then((data) => {
         Category.count += 1;
         resolve(new Category(Category.count, name));
       },
@@ -29,30 +30,5 @@ export class Category {
     });
     return promise;
   }
-
-  public removeCategory(): Promise<boolean> {
-    const promise = new Promise<boolean>((resolve, reject) => {
-      timer(100).toPromise().then((data) => {
-        resolve(true);
-      }, (reason) => {
-        reject('Category - ' + name + ' - has not been deleted; ' + reason);
-      });
-    });
-    return promise;
-  };
-
-  //public changeCategory(): Promise<Category> {
-  //  const promise = new Promise<Category>((resolve, reject) => {
-
-  //  })
-  //}
-
-  //public getCategory(id: number): Promise<Category> {
-  //  const promise = new Promise<Category>((resolve, reject) => {
-  //    timer(100).toPromise().then((data) => {
-  //      window.localStorage.getItem('Category_' + id.toString());
-  //    })
-  //  })
-  //}
 
 }
